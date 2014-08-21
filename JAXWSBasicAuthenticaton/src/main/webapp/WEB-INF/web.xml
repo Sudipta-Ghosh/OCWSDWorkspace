@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <listener>
+        <listener-class>
+            com.sun.xml.ws.transport.http.servlet.WSServletContextListener
+        </listener-class>
+    </listener>
+    <servlet>
+        <display-name>TestService</display-name>
+        <servlet-name>TestService</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TestService</servlet-name>
+        <url-pattern>/BasicAuthentication</url-pattern>        
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+   <security-constraint>
+            <web-resource-collection>    
+                  <web-resource-name>webservice</web-resource-name>
+                  <url-pattern>/BasicAuthentication</url-pattern>
+                  <http-method>POST</http-method>
+            </web-resource-collection>
+
+             <auth-constraint>
+                  <role-name>consumer</role-name>
+           </auth-constraint>
+     </security-constraint>
+      <login-config>
+            <auth-method>BASIC</auth-method>
+            <realm-name>default</realm-name>
+      </login-config>
+     <security-role>
+            <role-name>consumer</role-name>
+      </security-role>
+ </web-app>
